@@ -38,6 +38,10 @@ player.prototype.update = function() {
     console.log('player was updated');
 }
 
+player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
+};
 
 
 // Now instantiate your objects.
@@ -45,10 +49,8 @@ player.prototype.update = function() {
 // Place the player object in a variable called player
 var allEnemies = [];
 // Draw the player on the screen
-player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
-};
+var player = new player(202.5, 383);
 
 
 // This listens for key presses and sends the keys to your
