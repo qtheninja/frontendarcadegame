@@ -29,6 +29,7 @@ var player = function(x,y){
     //you need their location son
     this.x = x;
     this.y = y;
+    this.speed = 20;
     //THE IMAGE SHEET FOR THE PLAYER
     this.sprite = 'images/char-boy.png';
 }
@@ -43,6 +44,25 @@ player.prototype.render = function() {
 
 };
 
+player.prototype.handleInput = function(keyboard){
+    //test to see if it's working first
+    console.log(keyboard);
+    //STRAIGHT JACKED FROM 
+    //http://www.lostdecadegames.com/how-to-make-a-simple-html5-canvas-game/
+    if( keyboard === 'up'){
+        console.log('go left!');
+        player.y -= player.speed;
+    };
+
+    if(keyboard === 'down' ){
+        player.y += player.speed;
+    };
+
+    if(keyboard === 'left' ){
+        player.x -= player.speed;
+    };
+
+}
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -64,5 +84,4 @@ document.addEventListener('keyup', function(e) {
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
-    console.log(allowedKeys[e.keyCode]);
 });
