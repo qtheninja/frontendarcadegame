@@ -25,7 +25,7 @@ Enemy.prototype.update = function(dt) {
         //the longer you hang around the more you're gong to hurt
         this.speed = this.speed + 15;
         //let's make it reappear randomly on the road
-        this.y = Math.random() * 180; 
+        this.y = Math.random() * 180;
     };
 
     checkDefeat(this);
@@ -49,12 +49,10 @@ var player = function(x,y){
 }
 
 player.prototype.update = function() {
-    // hollered at me. 
+    // hollered at me.
     //console.log('player was updated: ');
 
     checkVictory(this);
-
-
     if (player.y > 400 ) {
         player.y = 400;
     };
@@ -64,43 +62,38 @@ player.prototype.update = function() {
     if (player.x < -18) {
         player.x = -18;
     };
-
-}
+};
 
 player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-
 };
 
 player.prototype.handleInput = function(keyboard){
     //test to see if it's working first
-    console.log(keyboard);
-    //STRAIGHT JACKED FROM 
+    //console.log(keyboard);
+    //STRAIGHT JACKED FROM
     //http://www.lostdecadegames.com/how-to-make-a-simple-html5-canvas-game/
     if( keyboard === 'up'){
         console.log('go left!');
         player.y -= player.speed;
     };
 
-    if(keyboard === 'down' ){
+    if( keyboard === 'down' ){
         player.y += player.speed;
     };
 
-    if(keyboard === 'left' ){
+    if( keyboard === 'left' ){
         player.x -= player.speed;
     };
 
-    if(keyboard === 'right' ){
+    if( keyboard === 'right' ){
         player.x += player.speed;
     };
 
 };
 
-
 // check to see if the player loses
-
 var checkDefeat = function(enemyBug){
-
         if ( player.y + 131 >= enemyBug.y + 90
         && player.x + 25 <= enemyBug.x + 88
         && player.y + 73 <= enemyBug.y + 135
@@ -112,19 +105,16 @@ var checkDefeat = function(enemyBug){
 };
 
 var checkVictory = function(player){
-       if (player.y + 50 <= 0) {        
+       if (player.y + 50 <= 0) {
         player.x = 202.5;
         player.y = 383;
         console.log('VICTORY!');
-
         //after you achieve the victory you need to clear the area
-        ctx.fillStyle = 'white';
         ctx.clearRect(0,0, 505, 606);
     }
 };
 
 var resetBug = function (bug){
-
     ctx.clearRect(0,0, 505,606);
 };
 
@@ -135,15 +125,15 @@ var allEnemies = [];
 // Draw the player on the screen
 var player = new player(202.5, 383);
 
-//Random number between 1 and 10
-var enemyCount = Math.floor((Math.random() * 10) + 1);
-console.log(enemyCount);
+//Random number between 1 and 4, this will determine the number of bugs
+var enemyCount = Math.floor((Math.random() * 4) + 1);
 for (i = 0; i < enemyCount; i ++ ){
-    //randomly create enemies
+    //take the random enemy number count and iterate with each one randomly appearing
+    // along the path and with variability in speed.
     var enemy = new Enemy(0, Math.random() * 180, Math.random() * 250);
+    //Add the enemies onto allEnemies which was provided via engine.js
     allEnemies.push(enemy);
 };
-
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
