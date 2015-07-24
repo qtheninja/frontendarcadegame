@@ -30,4 +30,4 @@ http://www.lostdecadegames.com/how-to-make-a-simple-html5-canvas-game/
 http://eloquentjavascript.net/15_game.html
 http://stackoverflow.com/questions/9772307/declaring-javascript-object-method-in-constructor-function-vs-in-prototype/9772864#9772864
 http://stackoverflow.com/questions/4535914/how-to-remove-an-object-from-the-canvas
-
+http://www.w3schools.com/jsref/jsref_random.asp

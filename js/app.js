@@ -4,7 +4,7 @@ var Enemy = function(x, y, speed) {
     // we've provided one for you to get started
     this.x = x;
     this.y = y;
-    this.speed = 35;
+    this.speed = speed + 10;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -54,6 +54,17 @@ player.prototype.update = function() {
 
     checkVictory(this);
 
+
+    if (player.y > 400 ) {
+        player.y = 400;
+    };
+    if (player.x > 420) {
+        player.x = 420;
+    };
+    if (player.x < -18) {
+        player.x = -18;
+    };
+
 }
 
 player.prototype.render = function() {
@@ -83,7 +94,7 @@ player.prototype.handleInput = function(keyboard){
         player.x += player.speed;
     };
 
-}
+};
 
 
 // check to see if the player loses
@@ -112,6 +123,10 @@ var checkVictory = function(player){
     }
 };
 
+var resetBug = function (bug){
+
+    ctx.clearRect(0,0, 505,606);
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -119,9 +134,16 @@ var checkVictory = function(player){
 var allEnemies = [];
 // Draw the player on the screen
 var player = new player(202.5, 383);
-//randomly create enemies
-var enemy = new Enemy(0, Math.random() * 180, Math.random() * 250);
-allEnemies.push(enemy);
+
+//Random number between 1 and 10
+var enemyCount = Math.floor((Math.random() * 10) + 1);
+console.log(enemyCount);
+for (i = 0; i < enemyCount; i ++ ){
+    //randomly create enemies
+    var enemy = new Enemy(0, Math.random() * 180, Math.random() * 250);
+    allEnemies.push(enemy);
+};
+
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
