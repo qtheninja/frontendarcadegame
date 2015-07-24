@@ -98,16 +98,17 @@ var checkDefeat = function(enemyBug){
         player.x = 202.5;
         player.y = 383;
     }
-
-
 };
 
 var checkVictory = function(player){
-       if (player.y + 63 <= 0) {        
+       if (player.y + 50 <= 0) {        
         player.x = 202.5;
         player.y = 383;
         console.log('VICTORY!');
 
+        //after you achieve the victory you need to clear the area
+        ctx.fillStyle = 'white';
+        ctx.clearRect(0,0, 505, 606);
     }
 };
 
