@@ -8,7 +8,7 @@ var Enemy = function(x, y, speed) {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-}
+};
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -29,12 +29,12 @@ Enemy.prototype.update = function(dt) {
     };
 
     checkDefeat(this);
-}
+};
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -46,12 +46,11 @@ var player = function(x,y){
     this.speed = 20;
     //THE IMAGE SHEET FOR THE PLAYER
     this.sprite = 'images/char-boy.png';
-}
+};
 
 player.prototype.update = function() {
     // hollered at me.
     //console.log('player was updated: ');
-
     checkVictory(this);
     if (player.y > 400 ) {
         player.y = 400;
@@ -89,29 +88,28 @@ player.prototype.handleInput = function(keyboard){
     if( keyboard === 'right' ){
         player.x += player.speed;
     };
-
 };
 
 // check to see if the player loses
 var checkDefeat = function(enemyBug){
-        if ( player.y + 131 >= enemyBug.y + 90
+    if ( player.y + 131 >= enemyBug.y + 90
         && player.x + 25 <= enemyBug.x + 88
         && player.y + 73 <= enemyBug.y + 135
         && player.x + 76 >= enemyBug.x + 11) {
         console.log('oops!');
         player.x = 202.5;
         player.y = 383;
-    }
+    };
 };
 
 var checkVictory = function(player){
-       if (player.y + 50 <= 0) {
+    if (player.y + 50 <= 0) {
         player.x = 202.5;
         player.y = 383;
         console.log('VICTORY!');
         //after you achieve the victory you need to clear the area
         ctx.clearRect(0,0, 505, 606);
-    }
+    };
 };
 
 var resetBug = function (bug){
@@ -122,6 +120,7 @@ var resetBug = function (bug){
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [];
+
 // Draw the player on the screen
 var player = new player(202.5, 383);
 
