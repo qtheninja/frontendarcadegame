@@ -4,7 +4,7 @@ var Enemy = function(x, y, speed) {
     // we've provided one for you to get started
     this.x = x;
     this.y = y;
-    this.speed = 25;
+    this.speed = 35;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -23,10 +23,12 @@ Enemy.prototype.update = function(dt) {
     if (this.x >= 505){
         this.x = 0;
         //the longer you hang around the more you're gong to hurt
-        this.speed = this.speed + 5;
+        this.speed = this.speed + 15;
         //let's make it reappear randomly on the road
         this.y = Math.random() * 180; 
-    }
+    };
+
+    checkDefeat(this);
 }
 
 // Draw the enemy on the screen, required method for game
@@ -50,17 +52,7 @@ player.prototype.update = function() {
     // hollered at me. 
     //console.log('player was updated: ');
 
-    // Are they touching?
-    if (
-        this.x <= (Enemy.x + 32)
-        && Enemy.x <= (this.x + 32)
-        && this.y <= (this.y + 32)
-        && Enemy.y <= (this.y + 32)
-    ) {
-        console.log('beep beep');
-        //++monstersCaught;
-        //reset();
-    }
+    checkVictory(this);
 
 }
 
@@ -92,6 +84,33 @@ player.prototype.handleInput = function(keyboard){
     };
 
 }
+
+
+// check to see if the player loses
+
+var checkDefeat = function(enemyBug){
+
+        if ( player.y + 131 >= enemyBug.y + 90
+        && player.x + 25 <= enemyBug.x + 88
+        && player.y + 73 <= enemyBug.y + 135
+        && player.x + 76 >= enemyBug.x + 11) {
+        console.log('oops!');
+        player.x = 202.5;
+        player.y = 383;
+    }
+
+
+};
+
+var checkVictory = function(player){
+       if (player.y + 63 <= 0) {        
+        player.x = 202.5;
+        player.y = 383;
+        console.log('VICTORY!');
+
+    }
+};
+
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
