@@ -37,6 +37,19 @@ var player = function(x,y){
 player.prototype.update = function() {
     // hollered at me. 
     //console.log('player was updated: ');
+
+    // Are they touching?
+    if (
+        this.x <= (Enemy.x + 32)
+        && Enemy.x <= (this.x + 32)
+        && this.y <= (this.y + 32)
+        && Enemy.y <= (this.y + 32)
+    ) {
+        console.log('beep beep');
+        //++monstersCaught;
+        //reset();
+    }
+
 }
 
 player.prototype.render = function() {
@@ -63,7 +76,7 @@ player.prototype.handleInput = function(keyboard){
     };
 
     if(keyboard === 'right' ){
-        player.y += player.speed;
+        player.x += player.speed;
     };
 
 }
@@ -75,7 +88,8 @@ var allEnemies = [];
 // Draw the player on the screen
 var player = new player(202.5, 383);
 //randomly create enemies
-var enemy = new Enemy(30,5);
+var enemy = new Enemy(0, Math.random() * 184 + 50, Math.random() * 256);
+allEnemies.push(enemy);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
