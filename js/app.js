@@ -62,6 +62,10 @@ player.prototype.handleInput = function(keyboard){
         player.x -= player.speed;
     };
 
+    if(keyboard === 'right' ){
+        player.y += player.speed;
+    };
+
 }
 
 // Now instantiate your objects.
