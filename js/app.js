@@ -35,7 +35,7 @@ var player = function(x,y){
 
 player.prototype.update = function() {
     // hollered at me. 
-    console.log('player was updated');
+    //console.log('player was updated: ');
 }
 
 player.prototype.render = function() {
@@ -49,9 +49,9 @@ player.prototype.render = function() {
 // Place the player object in a variable called player
 var allEnemies = [];
 // Draw the player on the screen
-
 var player = new player(202.5, 383);
-
+//randomly create enemies
+var enemy = new Enemy(30,5);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -64,4 +64,5 @@ document.addEventListener('keyup', function(e) {
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
+    console.log(allowedKeys[e.keyCode]);
 });
