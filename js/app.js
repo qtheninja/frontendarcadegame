@@ -17,6 +17,14 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x += this.speed * dt;
+    //Let's compare the location of the bug off screen with the canvas width
+    //if it's slipping of then let's go ahead and have it jump back to the left side
+    //and start it's journey all over again
+    if (this.x >= 505){
+        this.x = 0;
+        //the longer you hang around the more you're gong to hurt
+        this.speed ++;
+    }
 }
 
 // Draw the enemy on the screen, required method for game
