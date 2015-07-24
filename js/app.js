@@ -23,7 +23,9 @@ Enemy.prototype.update = function(dt) {
     if (this.x >= 505){
         this.x = 0;
         //the longer you hang around the more you're gong to hurt
-        this.speed ++;
+        this.speed = this.speed + 5;
+        //let's make it reappear randomly on the road
+        this.y = Math.random() * 180; 
     }
 }
 
