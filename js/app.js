@@ -3,11 +3,23 @@ var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = x;
-    this.y = y;
+   // this.y = 202;
     this.speed = speed + 10;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+
+    //Determine which alley
+    var tileHeight = 101;
+
+    if (y < .33){
+        this.y = tileHeight/2;
+    } else if ( y > .66){
+        this.y = tileHeight*2;
+    } else {
+        this.y = tileHeight*3/2;
+    }
+
 };
 
 // Update the enemy's position, required method for game
@@ -20,12 +32,22 @@ Enemy.prototype.update = function(dt) {
     //Let's compare the location of the bug off screen with the canvas width
     //if it's slipping of then let's go ahead and have it jump back to the left side
     //and start it's journey all over again
+    console.log(this.y);
     if (this.x >= 505) {
         this.x = 0;
         //the longer you hang around the more you're gong to hurt
         this.speed = this.speed + 15;
         //let's make it reappear randomly on the road
-        this.y = Math.random() * 180;
+    //Determine which alley
+    var tileHeight = 101;
+    var y = Math.random();
+    if (y < .33){
+        this.y = tileHeight/2;
+    } else if ( y > .66){
+        this.y = tileHeight*2;
+    } else {
+        this.y = tileHeight*3/2;
+    }
     }
 
     this.checkDefeat();
@@ -43,7 +65,8 @@ var Player = function(x, y) {
     //you need their location son
     this.x = x;
     this.y = y;
-    this.speed = 80;
+    this.speedy = 83;
+    this.speedx = 101;
     //THE IMAGE SHEET FOR THE PLAYER
     this.sprite = 'images/char-boy.png';
 };
@@ -75,20 +98,20 @@ Player.prototype.handleInput = function(keyboard) {
     //STRAIGHT JACKED FROM
     //http://www.lostdecadegames.com/how-to-make-a-simple-html5-canvas-game/
     if (keyboard === 'up') {
-        console.log('go left!');
-        this.y -= this.speed;
+        //console.log('go left!');
+        this.y -= this.speedy;
     }
 
     if (keyboard === 'down') {
-        this.y += this.speed;
+        this.y += this.speedy;
     }
 
     if (keyboard === 'left') {
-        this.x -= this.speed + 20;
+        this.x -= this.speedx;
     }
 
     if (keyboard === 'right') {
-        this.x += this.speed + 20;
+        this.x += this.speedx;
     }
 };
 
@@ -116,9 +139,6 @@ Player.prototype.checkVictory = function() {
     }
 };
 
-var resetBug = function(bug) {
-    ctx.clearRect(0, 0, 505, 606);
-};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -133,13 +153,9 @@ var enemyCount = Math.floor((Math.random() * 4) + 1);
 for (i = 0; i < enemyCount; i++) {
     //take the random enemy number count and iterate with each one randomly appearing
     // along the path and with variability in speed.
-    var enemy = new Enemy(0, Math.random() * 180, Math.random() * 250);
+    var enemy = new Enemy(0, Math.random(), Math.random() * 250);
     //Add the enemies onto allEnemies which was provided via engine.js
     allEnemies.push(enemy);
-}
-
-var reset = function(){
-    ctx.clearRect(0, 0, 505, 606);
 }
 
 // This listens for key presses and sends the keys to your
